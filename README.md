@@ -51,9 +51,9 @@ Configure project before it is created
 ### Compile program with listing output
 For programms
 ```
-rm QRPGLESRC/SIMS04.pgm && gmake QRPGLESRC/SIMS04.pgm COMPILE_OUTPUT=*PRINT
+rm QRPGLESRC/SIMS04.pgm || gmake QRPGLESRC/SIMS04.pgm COMPILE_OUTPUT=*PRINT
 ```
 For service programms
 ```
-rm QRPGLESRC/SISQL.srvpgm && gmake QRPGLESRC/SISQL.srvpgm COMPILE_OUTPUT=*PRINT
+rm QRPGLESRC/SISQL.srvpgm || gmake QRPGLESRC/SISQL.srvpgm COMPILE_OUTPUT=*PRINT
 ```
