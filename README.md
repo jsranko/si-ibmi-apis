@@ -28,7 +28,7 @@ git -c http.sslVerify=false clone https://github.com/jsranko/si-ibmi-apis.git
 ### Build project
 
 ```
-cd si-ibm-apis
+cd si-ibmi-apis
 bash setup.sh
 ```
 
