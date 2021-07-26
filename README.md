@@ -22,7 +22,7 @@ yum install git
 ### Clone project
 A local copy of the project must be created:
 ```
-git -c http.sslVerify=false clone https://github.com/jsranko/si-ibm-apis.git
+git -c http.sslVerify=false clone https://github.com/jsranko/si-ibmi-apis.git
 ```
 
 ### Build project
