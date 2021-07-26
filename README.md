@@ -55,5 +55,5 @@ rm QRPGLESRC/SIMS04.pgm || gmake QRPGLESRC/SIMS04.pgm COMPILE_OUTPUT=*PRINT
 ```
 For service programms
 ```
-rm QRPGLESRC/SISQL.srvpgm || gmake QRPGLESRC/SISQL.srvpgm COMPILE_OUTPUT=*PRINT
+rm QRPGLESRC/SISQL.module || gmake QRPGLESRC/SISQL.srvpgm COMPILE_OUTPUT=*PRINT
 ```
