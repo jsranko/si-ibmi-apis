@@ -1,0 +1,46 @@
+{
+   "text":"SI: Messages for Framework SIIIA",
+   "size":{
+      "initialStorageSize":10,
+      "incrementStorageSize":2,
+      "maximumIncrements":"*NOMAX"
+   },
+   "aut":"*LIBCRTAUT",
+   "ccsid":"*hex",
+   "messages":[
+      {
+         "msgid":"SIE0000",
+         "msg":"&1",
+         "seclvl":"Generic Message. No more details.",
+         "fmt":[
+            {
+               "dataType":"*CHAR",
+               "length":50,
+               "decimalPositions":0
+            }
+         ]
+      },
+      {
+         "msgid":"SIE0001",
+         "msg":"Error, cannot change current directory.",
+         "seclvl":"See Joblog."
+      },
+      {
+         "msgid":"SIE0002",
+         "msg":"Error, cannot get current directory.",
+         "seclvl":"See Joblog."
+      },
+      {
+         "msgid":"SIEAA00",
+         "msg":"Command &1 not supported by SICURL",
+         "seclvl":"For more details see Prozedure SICURL_runCmd in SRVPGM:SICURL.",
+         "fmt":[
+            {
+               "dataType":"*CHAR",
+               "length":6,
+               "decimalPositions":0
+            }
+         ]
+      }
+   ]
+}

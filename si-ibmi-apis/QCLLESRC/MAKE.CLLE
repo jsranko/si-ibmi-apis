@@ -1,0 +1,359 @@
+             PGM        PARM(&key &tgtrls)
+             DCL        &libsrc     *CHAR LEN(10) VALUE('*CURLIB')
+             DCL        &libobj     *CHAR LEN(10) VALUE('*CURLIB')
+             DCL        &key        *CHAR LEN(15)
+             DCL        &tgtrls    *CHAR LEN(10)
+             DCL        &object     *CHAR LEN(10)
+             DCL        &srctype    *CHAR LEN(10)
+             DCL        &error      *INT  LEN(4)
+/* ---------------------------------------------------------------*/
+             CALLSUBR   runINIT
+             CALLSUBR   crtMSGF
+/* ---------------------------------------------------------------*/
+             IF         COND(&tgtrls *EQ ' ') THEN(DO)
+                CHGVAR     &tgtrls ('*CURRENT')
+             ENDDO
+/* ---------------------------------------------------------------*/
+             CRTBNDDIR  BNDDIR(&libobj/SIIIA) TEXT('Binderverzeichnis für SIIIA')
+             MONMSG     MSGID(CPF5D10 CPF5D0B CPF2112)
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIUI')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIXCP')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIXCPUT')
+             CALLSUBR   crtBNDRPG RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIHASH')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIHASHUT')
+             CALLSUBR   crtBNDRPG RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIOD')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIITR')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIJL')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIDT')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIDTUT')
+             CALLSUBR   crtBNDRPG RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SISQL')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIULC')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIPATH')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIDBGA')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIDBGAUT')
+             CALLSUBR   crtBNDRPG RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIUUID')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIUUIDUT')
+             CALLSUBR   crtBNDRPG RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SISTR')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SISTRUT')
+             CALLSUBR   crtBNDRPG RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIQSH')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIQSHLOG')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIQSHLOGUT')
+             CALLSUBR   crtBNDRPG RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SICURL')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SICURLUT')
+             CALLSUBR   crtBNDRPG RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIIMF')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIIOF')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SINL')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIISF')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIISFUT')
+             CALLSUBR   crtBNDRPG RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIDIR')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+             CHGVAR     &object ('SIJI')
+             CALLSUBR   crtSRVPGM RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+             CALLSUBR   addBNDDIRE RTNVAL(&error)
+             IF         COND(&error *EQ 1) THEN(GOTO CMDLBL(PGMENDE))
+/* ---------------------------------------------------------------*/
+
+
+ PGMENDE:
+/* ---------------------------------------------------------------*/
+             CLRLIB     LIB(QTEMP)
+/* ---------------------------------------------------------------*/
+/*   RMVLIBLE   LIB(&libobj)                                      */
+/* ============================================================== */
+             SUBR       crtSRVPGM
+                RTVMBRD    FILE(&libsrc/QRPGLESRC) +
+                           MBR(&object) +
+                           SRCTYPE(&srctype)
+                IF         COND(&srctype *EQ 'RPGLE') THEN(DO)
+                   CRTRPGMOD  MODULE(QTEMP/&object) +
+                              SRCFILE(&libsrc/QRPGLESRC) +
+                              SRCMBR(&object) +
+                              DBGVIEW(*ALL) +
+                              DBGENCKEY(&key) +
+                              OPTION(*EVENTF) +
+                              TGTRLS(&tgtrls)
+                   MONMSG     MSGID(CPF0000 ICE0000) EXEC(DO)
+                      DSPSPLF    FILE(&object) JOB(*) SPLNBR(*LAST)
+                      RTNSUBR    RTNVAL(1)
+                   ENDDO
+                ENDDO
+                ELSE       DO
+                   CRTSQLRPGI OBJ(QTEMP/&object) +
+                              SRCFILE(&libsrc/QRPGLESRC) +
+                              SRCMBR(&object) +
+                              OBJTYPE(*MODULE) +
+                              REPLACE(*YES) +
+                              OPTION(*XREF *EVENTF) +
+                              DBGVIEW(*SOURCE) +
+                              DBGENCKEY(&key) +
+                              RPGPPOPT(*LVL2) +
+                              TGTRLS(&tgtrls)
+                   MONMSG     MSGID(CPF0000 ICE0000) EXEC(DO)
+                      DSPSPLF    FILE(&object) JOB(*) SPLNBR(*LAST)
+                      RTNSUBR    RTNVAL(1)
+                   ENDDO
+                ENDDO
+
+                CRTSRVPGM  SRVPGM(&libobj/&object) +
+                           MODULE(QTEMP/&object) +
+                           EXPORT(*SRCFILE) +
+                           SRCFILE(&libsrc/QSRVSRC) +
+                           SRCMBR(*SRVPGM) +
+                           OPTION(*DUPPROC) +
+                           TGTRLS(&tgtrls)
+                MONMSG     MSGID(CPF0000) EXEC(DO)
+                   DSPJOBLOG
+                   RTNSUBR    RTNVAL(1)
+                ENDDO
+             ENDSUBR
+/* ============================================================== */
+             SUBR       addBNDDIRE
+                RMVBNDDIRE BNDDIR(&libobj/SIIIA) OBJ((&object *SRVPGM))
+                MONMSG     MSGID(CPD5D1C)
+                ADDBNDDIRE BNDDIR(&libobj/SIIIA) OBJ((&object *SRVPGM *DEFER))
+                MONMSG     MSGID(CPF0000) EXEC(DO)
+                   DSPJOBLOG
+                   RTNSUBR    RTNVAL(1)
+                ENDDO
+             ENDSUBR
+/* ============================================================== */
+             SUBR       crtBNDRPG
+                CRTBNDRPG  PGM(&libobj/&object) +
+                           SRCFILE(&libsrc/QRPGLESRC) +
+                           SRCMBR(&object) +
+                           OPTION(*EVENTF) +
+                           DBGVIEW(*ALL) +
+                           DBGENCKEY(&key) +
+                           TGTRLS(&tgtrls)
+                MONMSG     MSGID(CPF0000) EXEC(DO)
+                   DSPSPLF    FILE(&object) JOB(*) SPLNBR(*LAST)
+                   RTNSUBR    RTNVAL(1)
+                ENDDO
+
+             ENDSUBR
+/* ============================================================== */
+             SUBR       crtSQLRPGI
+                CRTSQLRPGI OBJ(&libobj/&object) +
+                           SRCFILE(&libsrc/QRPGLESRC) +
+                           SRCMBR(&object) +
+                           OPTION(*EVENTF) +
+                           RPGPPOPT(*LVL2) +
+                           DBGVIEW(*SOURCE) +
+                           DBGENCKEY(&key) +
+                           TGTRLS(&tgtrls)
+                MONMSG     MSGID(CPF0000) EXEC(DO)
+                   DSPSPLF    FILE(&object) JOB(*) SPLNBR(*LAST)
+                   RTNSUBR    RTNVAL(1)
+                ENDDO
+
+             ENDSUBR
+/* ============================================================== */
+             SUBR       crtDSPF
+                CRTDSPF    FILE(&libobj/&object) +
+                            SRCFILE(&libsrc/QDDSSRC) +
+                            SRCMBR(&object)
+                MONMSG     MSGID(CPF0000) EXEC(DO)
+                   DSPSPLF    FILE(&object) JOB(*) SPLNBR(*LAST)
+                   RTNSUBR    RTNVAL(1)
+                ENDDO
+
+             ENDSUBR
+/* ============================================================== */
+             SUBR       crtPF
+                CRTPF      FILE(&libobj/&object) +
+                           SRCFILE(&libsrc/QDDSSRC) +
+                           SRCMBR(&object) +
+                           IGCDTA(*N)
+                MONMSG     MSGID(CPF0000) EXEC(DO)
+                   DSPSPLF    FILE(&object) JOB(*) SPLNBR(*LAST)
+                   RTNSUBR    RTNVAL(1)
+                ENDDO
+
+             ENDSUBR
+/* ============================================================== */
+             SUBR       runSQLS
+                RUNSQLSTM  SRCFILE(&libsrc/QDDLSRC) +
+                           SRCMBR(&object) +
+                           COMMIT(*NONE) +
+                           MARGINS(240) +
+                           OUTPUT(*PRINT)
+                MONMSG     MSGID(CPF0000) EXEC(DO)
+                   DSPSPLF    FILE(&object) JOB(*) SPLNBR(*LAST)
+                   RTNSUBR    RTNVAL(1)
+                ENDDO
+
+             ENDSUBR
+
+/* ============================================================== */
+             SUBR       runINIT
+                ADDBNDDIRE BNDDIR(&libobj/SIIIA) OBJ((QSHELL/QZSHAPI))
+                MONMSG     MSGID(CPF0000)
+             ENDSUBR
+/* ============================================================== */
+             SUBR       crtMSGF
+                DLTMSGF    MSGF(SIMSGF)
+                MONMSG     MSGID(CPF2105)
+                CRTMSGF    MSGF(&libobj/SIMSGF) TEXT('SI: Messages for Framework SIIIA')
+                MONMSG     MSGID(CPF0000)
+
+                /* Messages for SIXCP  */
+                QSYS/ADDMSGD MSGID(SIE0000) +
+                             MSGF(&libobj/SIMSGF) +
+                             MSG('&1') +
+                             SECLVL('Generic Message. No more details.') +
+                             FMT((*CHAR 50))
+
+                QSYS/ADDMSGD MSGID(SIE0001) +
+                             MSGF(&libobj/SIMSGF) +
+                             MSG('Error, cannot change current directory.') +
+                             SECLVL('See Joblog.')
+
+                QSYS/ADDMSGD MSGID(SIE0002) +
+                             MSGF(&libobj/SIMSGF) +
+                             MSG('Error, cannot get current directory.') +
+                             SECLVL('See Joblog.')
+
+                /* Messages for SICURL */
+                QSYS/ADDMSGD MSGID(SIEAA00) +
+                             MSGF(&libobj/SIMSGF) +
+                             MSG('Command &1 not supported by SICURL') +
+                             SECLVL('For more details see Prozedure SICURL_runCmd -
+                             in SRVPGM:SICURL.') FMT((*CHAR 6))
+
+             ENDSUBR
+/* ============================================================== */
+
+             ENDPGM

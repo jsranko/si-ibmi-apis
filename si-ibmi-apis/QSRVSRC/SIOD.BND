@@ -1,0 +1,8 @@
+STRPGMEXP  PGMLVL(*CURRENT) SIGNATURE('SI v202007231106')
+   EXPORT     SYMBOL('SIOD_new')
+   EXPORT     SYMBOL('SIOD_getCreationDateAndTime')
+   EXPORT     SYMBOL('SIOD_exist')
+   EXPORT     SYMBOL('SIOD_getReturnLibrary')
+   EXPORT     SYMBOL('SIOD_getObjectType')
+   EXPORT     SYMBOL('SIOD_close')
+ENDPGMEXP

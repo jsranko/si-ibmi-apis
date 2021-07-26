@@ -1,0 +1,10 @@
+STRPGMEXP  PGMLVL(*CURRENT) SIGNATURE('SI v201903061343')
+   EXPORT     SYMBOL('SIULC_new')
+   EXPORT     SYMBOL('SIULC_newWithKey')
+   EXPORT     SYMBOL('SIULC_isValid')
+   EXPORT     SYMBOL('SIULC_getUsername')
+   EXPORT     SYMBOL('SIULC_getPassword')
+   EXPORT     SYMBOL('SIULC_getPathToKey')
+   EXPORT     SYMBOL('SIULC_isWithUsernamePassword')
+   EXPORT     SYMBOL('SIULC_isWithKey')
+ENDPGMEXP

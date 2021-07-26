@@ -1,0 +1,48 @@
+{
+	"server": { 
+		"name": "SIIIA",
+		"port": 16787,
+		"userId": "QWSERVICE",
+		"version": "*CURRENT",
+		"printErrorDetails":false
+	},
+	"services": [
+		{
+			"name": "SIROUTER",
+			"programObject": "/QSYS.LIB/$(LIBRARY).LIB/SIROUTER.PGM",
+			"userId": "*SERVER",
+			"detectFieldLengths": true,
+			"serviceType": "*REST",
+			"host": "localhost",
+			"targetNamespace": null,
+			"propertiesFile": "/tmp/SIROUTER.propertiesFile",
+			"libraryList": "SIIIA:QTEMP",
+			"libraryListPosition": "*FIRST",
+			"transportMetadata": "REMOTE_ADDR:REMOTE_USER:REQUEST_METHOD:REQUEST_URL:REQUEST_URI:QUERY_STRING:SERVER_NAME:SERVER_PORT",
+			"transportHeaders": null,
+			"useParamNameAsElementName": false,
+			"methods": [
+				{
+					"SIROUTER.uri.path.template": null,
+					"SIROUTER.http.request.method": "GET",
+					"SIROUTER.wrap.input.parameters": false,
+					"SIROUTER.wrap.output.parameter": false,
+					"SIROUTER.consumes": "application/json",
+					"SIROUTER.produces": "application/json",
+					"SIROUTER.response.code.parameter": "RESPONSECODE",
+					"SIROUTER.http.headers.parameter": "RESPONSEHEADERS",
+					"SIROUTER.PAYLOADIN.usage": "input",
+					"SIROUTER.PAYLOADOUT.usage": "output",
+					"SIROUTER.RESPONSECODE.usage": "output",
+					"SIROUTER.RESPONSEHEADERS.usage": "output"
+				}
+			],
+			"script" : [
+				{
+					"description": "Description",
+					"script": "./xxxx.sh"
+				}	
+			]
+		}
+	]
+}

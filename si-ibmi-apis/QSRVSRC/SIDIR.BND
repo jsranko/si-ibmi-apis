@@ -1,0 +1,9 @@
+STRPGMEXP  PGMLVL(*CURRENT) SIGNATURE('SI v201903221239')
+   EXPORT     SYMBOL('SIDIR_')
+   EXPORT     SYMBOL('SIDIR_create')
+   EXPORT     SYMBOL('SIDIR_exist')
+   EXPORT     SYMBOL('SIDIR_getName')
+   EXPORT     SYMBOL('SIDIR_setCurrentDirectory')
+   EXPORT     SYMBOL('SIDIR_getCurrentDirectory')
+   EXPORT     SYMBOL('SIDIR_setCurrentDirectoryByPath')
+ENDPGMEXP
