@@ -23,8 +23,8 @@
         //==========================================================================================
 
          dcl-pr RetrieveDataArea extproc('QXXRTVDA');
-           DataAreaName likeds(tQXXRTVDA_DataArea) const;
-           StartPosition likeds(tQXXRTVDA_Start) const;
-           Length likeds(tQXXRTVDA_Length) const;
-           DataAreaData likeds(tQXXRTVDA_Data);
+           DataAreaName like(tQXXRTVDA_DataArea) const;
+           StartPosition like(tQXXRTVDA_Start) const;
+           Length like(tQXXRTVDA_Length) const;
+           DataAreaData like(tQXXRTVDA_Data);
          end-pr;
