@@ -40,11 +40,14 @@ ctl-opt bnddir('$(LIBRARY)/SIIIA');
 dcl-proc SIDTQUT;
 dcl-pi SIDTQUT;
 end-pi;
-dcl-s Name like(tSIDTQ_Name);
-dcl-s Library like(tSIDTQ_Library);
+dcl-s Name like(tSIDTQ_Name) inz('SIDTQUT');
+dcl-s Library like(tSIDTQ_Library) inz('QTEMP');
+dcl-s cmd varchar(512);
+dcl-s Data like(tQSNDDTAQ_Data);
 dcl-s dtaqObj like(tSIDTQ);
 
-  if not system('CRTDTAQ DTAQ(' + Library + '/' + Name ') MAXLEN(64512)');
+  cmd = 'CRTDTAQ DTAQ(' + Library + '/' + Name + ') MAXLEN(64512)';
+  if system(cmd) <> cSystem_Return_Succesful;
      dsply ('DTAQ nicht erstellt.');
      return;
   endif;
@@ -52,12 +55,16 @@ dcl-s dtaqObj like(tSIDTQ);
   dtaqObj = SIDTQ_new(Name:Library);
 
   if not SIDTQ_write(dtaqObj:'Data');
-
   endif;
+
+  Data = SIDTQ_read(dtaqObj);
 
   SIDTQ_close(dtaqObj);
 
 return;
+on-exit;
+  cmd = 'DLTDTAQ DTAQ(' + Library + '/' + Name + ')';
+  system(cmd);
 end-proc;
 
 //------------------------------------------------------------------------------------------

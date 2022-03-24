@@ -6,7 +6,8 @@
   /eof
 /endif
 
-/include qcpylesrc/qmhsndpmp
+/include qcpylesrc/qsnddtaqp
+/include qcpylesrc/qrcvdtaqp
 /include qcpylesrc/siiiap
 
 //==========================================================================================
@@ -21,8 +22,8 @@ dcl-c cSIDTQ_QCPFMSG const('QCPFMSG   QSYS');
 
 dcl-s tSIDTQ like(tSIDTQ_Def) template;
 
-dcl-s tSIDTQ_Name like(tQSNDDTAQ_DataQueueName) template;
-dcl-s tSIDTQ_Library like(tQSNDDTAQ_LibraryName) template;
+dcl-s tSIDTQ_Name varchar(10) template;
+dcl-s tSIDTQ_Library varchar(10) template;
 dcl-s tSIDTQ_WaitTime like(tQRCVDTAQ_WaitTime) template;
 dcl-s tSIDTQ_Data like(tQRCVDTAQ_Data) template;
 dcl-s tSIDTQ_SenderInformation like(tQRCVDTAQ_SenderInformation) template;
