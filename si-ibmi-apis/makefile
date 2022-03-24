@@ -327,7 +327,7 @@ update-cpyfiles: clean-cpyfiles \
 	liblist -a $(LIBRARY);\
 	system -kp "CRTBNDCL PGM($(LIBRARY)/$(notdir $*)) SRCSTMF('$(ROOT_DIR)/$<') DFTACTGRP(*NO) ACTGRP(*STGMDL) STGMDL(*SNGLVL) OUTPUT($(COMPILE_OUTPUT)) REPLACE(*YES) DBGVIEW($(DBGVIEW))"    
 
-%.cpysrc: %.rpgle $(DIR_CPY).srcpf
+%.cpysrc: %.RPGLE $(DIR_CPY).srcpf
 	$(call substitute,$<,$@) && \
 	$(call copy_to_srcpf,$(ROOT_DIR)/$*.cpysrc,$(LIBRARY),$(DIR_CPY),$(notdir $*)) && \
 	touch $@
