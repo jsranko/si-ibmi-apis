@@ -22,7 +22,7 @@
         // Prototypes
         //==========================================================================================
 
-         dcl-pr RetrieveDataArea extproc('QXXRTVDA');
+         dcl-pr RetrieveDataArea extpgm('QXXRTVDA');
            DataAreaName like(tQXXRTVDA_DataArea) const;
            StartPosition like(tQXXRTVDA_Start) const;
            Length like(tQXXRTVDA_Length) const;

@@ -115,7 +115,7 @@ SRCFILES=\
 	$(SRCFILES_0:=.srcpf)
 
 CPYSRCS:=\
-	$(patsubst %.rpgle,%.cpysrc,$(wildcard $(DIR_CPY)/*.rpgle)) 
+	$(patsubst %.RPGLE,%.cpysrc,$(wildcard $(DIR_CPY)/*.RPGLE)) 
 
 CSRCS:=\
 	$(patsubst %.c,%.cpyc,$(wildcard $(DIR_C)/*.c)) \
