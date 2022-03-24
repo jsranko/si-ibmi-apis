@@ -61,14 +61,15 @@ SIAPIS=\
 	$(DIR_RPG)/SIDIR.srvpgm \
 	$(DIR_RPG)/SIJI.srvpgm \
 	$(DIR_RPG)/SICJ.srvpgm \
-	# $(DIR_RPG)/SIMF.srvpgm \
+	### $(DIR_RPG)/SIMF.srvpgm \
 	$(DIR_RPG)/SISRVPGM.srvpgm \
 	$(DIR_RPG)/SIRE.srvpgm \
 	$(DIR_RPG)/SIPFM.srvpgm \
 	$(DIR_RPG)/SIEMAIL.srvpgm \
 	$(DIR_RPG)/SIRIO.srvpgm \
 	$(DIR_RPG)/SIENVVAR.srvpgm \
-	$(DIR_RPG)/SISCLI.srvpgm
+	$(DIR_RPG)/SISCLI.srvpgm \
+	$(DIR_RPG)/SIDTQ.srvpgm
 
 PGMS:=\
 	$(patsubst %.RPGLE,%.pgm,$(shell grep -il " main" $(DIR_RPG)/*.RPGLE)) \
@@ -254,7 +255,7 @@ update-cpyfiles: clean-cpyfiles \
 	$(call substitute,$<,$@) && \
 	$(call copy_to_srcpf,$(ROOT_DIR)/$*.module,$(LIBRARY),$(DIR_RPG),$(notdir $*))
 	liblist -a $(LIBRARY);\
-	system -Kp "CRTRPGMOD MODULE($(LIBRARY)/$(notdir $*)) SRCSTMF('$(ROOT_DIR)/$@') DBGVIEW($(DBGVIEW)) REPLACE(*YES) INCDIR('$(ROOT_DIR)') STGMDL($(STGMDL)) TGTCCSID(*JOB) OUTPUT($(COMPILE_OUTPUT))"	 || rm $@
+	system -Kp "CRTRPGMOD MODULE($(LIBRARY)/$(notdir $*)) SRCSTMF('$(ROOT_DIR)/$@') DBGVIEW($(DBGVIEW)) REPLACE(*YES) INCDIR('$(ROOT_DIR)') STGMDL($(STGMDL)) TGTCCSID(*JOB) OUTPUT($(COMPILE_OUTPUT))"	 && rm $@
 	
 %.module: %.SQLRPGLE
 	# @echo "$$@=$@ $$%=$% $$<=$< $$?=$? $$^=$^ $$+=$+ $$|=$| $$*=$*"
