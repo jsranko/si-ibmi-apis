@@ -26,12 +26,14 @@ dcl-s tSIDTQ_Name varchar(10) template;
 dcl-s tSIDTQ_Library varchar(10) template;
 dcl-s tSIDTQ_WaitTime like(tQRCVDTAQ_WaitTime) template;
 dcl-s tSIDTQ_Data like(tQRCVDTAQ_Data) template;
+dcl-s tSIDTQ_DataLen like(tQRCVDTAQ_LengthOfData ) template;
 dcl-s tSIDTQ_SenderInformation like(tQRCVDTAQ_SenderInformation) template;
 
 dcl-ds tSIDTQ_Def qualified;
   Name like(tSIDTQ_Name);
   Library like(tSIDTQ_Library);
   WaitTime like(tSIDTQ_WaitTime);
+  DataLen like(tSIDTQ_DataLen);
   SenderInformation like(tSIDTQ_SenderInformation);
 end-ds;
 
@@ -56,6 +58,7 @@ end-pr;
 dcl-pr SIDTQ_write ind extproc(*dclcase);
   SIDTQ like(tSIDTQ);
   Data pointer value options(*string);
+  DataLen like(tSIDTQ_DataLen) value options(*nopass);
 end-pr;
 
 dcl-pr SIDTQ_read like(tQSNDDTAQ_Data) extproc(*dclcase);
@@ -68,5 +71,9 @@ dcl-pr SIDTQ_setWaitTime extproc(*dclcase);
 end-pr;
 
 dcl-pr SIDTQ_setSenderInformation like(tQRCVDTAQ_SenderInformation) extproc(*dclcase);
+  SIDTQ like(tSIDTQ);
+end-pr;
+
+dcl-pr SIDTQ_getDataLen like(tSIDTQ_DataLen) extproc(*dclcase);
   SIDTQ like(tSIDTQ);
 end-pr;

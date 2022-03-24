@@ -57,6 +57,10 @@ dcl-s dtaqObj like(tSIDTQ);
   if not SIDTQ_write(dtaqObj:'Data');
   endif;
 
+  if not SIDTQ_write(dtaqObj:'Data':2);
+  endif;
+
+  Data = SIDTQ_read(dtaqObj);
   Data = SIDTQ_read(dtaqObj);
 
   SIDTQ_close(dtaqObj);

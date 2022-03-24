@@ -93,17 +93,23 @@ dcl-proc SIDTQ_write export;
 dcl-pi SIDTQ_write ind extproc(*dclcase);
   SIDTQ like(tSIDTQ);
   Data pointer value options(*string);
+  DataLen like(tSIDTQ_DataLen) value options(*nopass);
 end-pi;
-dcl-s dataLen like(tQSNDDTAQ_LengthOfData);
+dcl-s nDataLen like(tSIDTQ_DataLen);
 dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
 
   pSIDTQ = %addr(SIDTQ);
 
-  dataLen = strlen(Data);
+  if %parms >= %parmnum(DataLen);
+     nDataLen = DataLen;
+  else;
+     nDataLen = strlen(Data);
+  endif;
+
   monitor;
      SendDataQueue(dsSIDTQ.Name
                   :dsSIDTQ.Library
-                  :dataLen
+                  :nDataLen
                   :%str(Data));
   on-error;
      return *off;
@@ -121,22 +127,21 @@ dcl-pi SIDTQ_read like(tQSNDDTAQ_Data) extproc(*dclcase);
   SIDTQ like(tSIDTQ);
 end-pi;
 dcl-s DataLen like(tQRCVDTAQ_LengthOfData);
-dcl-s Data like(tQRCVDTAQ_Data);
 dcl-s KeyOrder like(tQRCVDTAQ_KeyOrder) inz(*blanks);
 dcl-s LengthOfKeyData like(tQRCVDTAQ_LengthOfKeyData) inz(0);
 dcl-s KeyData like(tQRCVDTAQ_KeyData);
 dcl-s LengthOfSenderInformation like(tQRCVDTAQ_LengthOfSenderInformation) inz(%size(SenderInformation));
 dcl-s SenderInformation like(tQRCVDTAQ_SenderInformation);
+dcl-s output like(tQRCVDTAQ_Data);
 dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
 
   pSIDTQ = %addr(SIDTQ);
 
-  dataLen = strlen(Data);
   monitor;
      ReceiveDataQueue(dsSIDTQ.Name
                      :dsSIDTQ.Library
                      :DataLen
-                     :Data
+                     :output
                      :dsSIDTQ.WaitTime
                      :KeyOrder
                      :LengthOfKeyData
@@ -144,12 +149,13 @@ dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
                      :LengthOfSenderInformation
                      :SenderInformation);
   on-error;
-     return *off;
+     return *allx'00';
   endmon;
 
+  dsSIDTQ.DataLen = DataLen;
   dsSIDTQ.SenderInformation = SenderInformation;
 
-  return *on;
+  return output;
 
 on-exit;
 end-proc;
@@ -182,5 +188,19 @@ dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
   pSIDTQ = %addr(SIDTQ);
 
   return dsSIDTQ.SenderInformation;
+on-exit;
+end-proc;
+
+//------------------------------------------------------------------------------------------
+
+dcl-proc SIDTQ_getDataLen export;
+dcl-pi SIDTQ_getDataLen like(tSIDTQ_DataLen) extproc(*dclcase);
+  SIDTQ like(tSIDTQ);
+end-pi;
+dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
+
+  pSIDTQ = %addr(SIDTQ);
+
+  return dsSIDTQ.DataLen;
 on-exit;
 end-proc;
