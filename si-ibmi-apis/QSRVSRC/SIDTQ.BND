@@ -6,4 +6,8 @@ STRPGMEXP  PGMLVL(*CURRENT) SIGNATURE('SI v202203241625')
    EXPORT     SYMBOL('SIDTQ_setWaitTime')
    EXPORT     SYMBOL('SIDTQ_getSenderInformation')
    EXPORT     SYMBOL('SIDTQ_getDataLen')
+   EXPORT     SYMBOL('SIDTQ_exist')
+   EXPORT     SYMBOL('SIDTQ_create')
+   EXPORT     SYMBOL('SIDTQ_getName')
+   EXPORT     SYMBOL('SIDTQ_getLibrary')
 ENDPGMEXP

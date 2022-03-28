@@ -38,6 +38,7 @@
 /include qcpylesrc/qrcvdtaqp
 /include qcpylesrc/qsnddtaqp
 /include qcpylesrc/siobjtypp
+/include qcpylesrc/systemp
 
 //==========================================================================================
 // Procedures
@@ -60,12 +61,13 @@ dcl-ds dsSIDTQ likeds(tSIDTQ_Def) inz;
   endif;
 
   dtaqObj = SIOD_new(Library:Name:cOBJECTTYPE_DataQueue);
-  if not SIOD_exist(dtaqObj);
-     SIXCP_throwWithMessage(Library + ' not valid.');
+  if SIOD_exist(dtaqObj);
+     dsSIDTQ.Library = SIOD_getReturnLibrary(dtaqObj);
+  else;
+     dsSIDTQ.Library = Library;
   endif;
 
   dsSIDTQ.Name = Name;
-  dsSIDTQ.Library = SIOD_getReturnLibrary(dtaqObj);
   SIDTQ_setWaitTime(dsSIDTQ:sWaitTime);
 
   return dsSIDTQ;
@@ -202,5 +204,118 @@ dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
   pSIDTQ = %addr(SIDTQ);
 
   return dsSIDTQ.DataLen;
+on-exit;
+end-proc;
+
+//------------------------------------------------------------------------------------------
+
+dcl-proc SIDTQ_exist export;
+dcl-pi SIDTQ_exist ind extproc(*dclcase);
+  SIDTQ like(tSIDTQ);
+end-pi;
+dcl-s dtaqObj like(tSIOD);
+dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
+
+  pSIDTQ = %addr(SIDTQ);
+
+  dtaqObj = SIOD_new(dsSIDTQ.Library:dsSIDTQ.Name:cOBJECTTYPE_DataQueue);
+  return SIOD_exist(dtaqObj);
+
+on-exit;
+end-proc;
+
+//------------------------------------------------------------------------------------------
+
+dcl-proc SIDTQ_create export;
+dcl-pi SIDTQ_create ind extproc(*dclcase);
+  SIDTQ like(tSIDTQ);
+  Type like(tSIDTQ_Type) const options(*nopass:*omit);
+  MaxLen like(tSIDTQ_MaxLen) const options(*nopass:*omit);
+  Seq like(tSIDTQ_Seq) const options(*nopass:*omit);
+  SizeMaxCount like(tSIDTQ_SizeMaxCount) const options(*nopass:*omit);
+  SizeCurrCount like(tSIDTQ_SizeCurrCount) const options(*nopass:*omit);
+  Aut  like(tSIDTQ_Aut) const options(*nopass:*omit);
+end-pi;
+dcl-s sType like(tSIDTQ_Type) inz('*STD');
+dcl-s nMaxLen like(tSIDTQ_MaxLen) inz(100);
+dcl-s sSeq like(tSIDTQ_Seq) inz('*FIFO');
+dcl-s sSizeMaxCount like(tSIDTQ_SizeMaxCount) inz('*MAX16MB');
+dcl-s nSizeCurrCount like(tSIDTQ_SizeCurrCount) inz(16);
+dcl-s sAut  like(tSIDTQ_Aut) inz('*LIBCRTAUT');
+dcl-s cmd varchar(512);
+dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
+
+  pSIDTQ = %addr(SIDTQ);
+
+  if %parms >= %parmnum(Type)
+  and %addr(Type) <> *null;
+     sType = Type;
+  endif;
+
+  if %parms >= %parmnum(MaxLen)
+  and %addr(MaxLen) <> *null;
+     nMaxLen = MaxLen;
+  endif;
+
+  if %parms >= %parmnum(Seq)
+  and %addr(Seq) <> *null;
+     sSeq = Seq;
+  endif;
+
+  if %parms >= %parmnum(SizeMaxCount)
+  and %addr(SizeMaxCount) <> *null;
+     sSizeMaxCount = SizeMaxCount;
+  endif;
+
+  if %parms >= %parmnum(SizeCurrCount)
+  and %addr(SizeCurrCount) <> *null;
+     nSizeCurrCount = SizeCurrCount;
+  endif;
+
+  if %parms >= %parmnum(Aut)
+  and %addr(Aut) <> *null;
+     sAut = Aut;
+  endif;
+
+  cmd = 'CRTDTAQ DTAQ(' + dsSIDTQ.Library + '/' + dsSIDTQ.Name + ') ' +
+               ' TYPE(' + sType + ') ' +
+               ' MAXLEN(' + %editc(nMaxLen:'X') + ') ' +
+               ' SEQ(' + sSeq + ') ' +
+               ' SIZE(' + sSizeMaxCount + ' ' + %editc(nSizeCurrCount:'X') + ') ' +
+               ' AUT(' + sAut + ') ';
+  if system(cmd) <> cSystem_Return_Succesful;
+
+  endif;
+
+  return *on;
+
+on-exit;
+end-proc;
+
+//------------------------------------------------------------------------------------------
+
+dcl-proc SIDTQ_getName export;
+dcl-pi SIDTQ_getName like(tSIDTQ_Name) extproc(*dclcase);
+  SIDTQ like(tSIDTQ);
+end-pi;
+dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
+
+  pSIDTQ = %addr(SIDTQ);
+
+  return dsSIDTQ.Name;
+on-exit;
+end-proc;
+
+//------------------------------------------------------------------------------------------
+
+dcl-proc SIDTQ_getLibrary export;
+dcl-pi SIDTQ_getLibrary like(tSIDTQ_Library) extproc(*dclcase);
+  SIDTQ like(tSIDTQ);
+end-pi;
+dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
+
+  pSIDTQ = %addr(SIDTQ);
+
+  return dsSIDTQ.Library;
 on-exit;
 end-proc;
