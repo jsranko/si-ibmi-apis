@@ -36,3 +36,7 @@ dcl-pr SIENVVAR_set ind extproc(*dclcase);
   VarName like(tSIENVVAR_VarName) const;
   VarValue like(tSIENVVAR_Value) const;
 end-pr;
+
+dcl-pr SIENVVAR_exist ind extproc(*dclcase);
+  VarName like(tSIENVVAR_VarName) const;
+end-pr;

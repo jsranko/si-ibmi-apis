@@ -74,4 +74,19 @@ dcl-s envvar like(tSIENVVAR_Value);
   return *on;
 end-proc;
 
+//------------------------------------------------------------------------------------------
+
+dcl-proc SIENVVAR_exist export;
+dcl-pi SIENVVAR_exist ind extproc(*dclcase);
+  VarName like(tSIENVVAR_VarName) const;
+end-pi;
+dcl-s ptr like(tGETENV_Return);
+
+  ptr = getenv(VarName);
+  if ptr <> *null;
+    return *on;
+  endif;
+
+  return *off;
+end-proc;
 
