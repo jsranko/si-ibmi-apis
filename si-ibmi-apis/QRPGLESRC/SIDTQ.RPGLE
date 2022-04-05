@@ -94,8 +94,8 @@ end-proc;
 dcl-proc SIDTQ_write export;
 dcl-pi SIDTQ_write ind extproc(*dclcase);
   SIDTQ like(tSIDTQ);
-  Data pointer value options(*string);
-  DataLen like(tSIDTQ_DataLen) value options(*nopass);
+  Data like(tSIDTQ_Data) const;
+  DataLen like(tSIDTQ_DataLen) const options(*nopass);
 end-pi;
 dcl-s nDataLen like(tSIDTQ_DataLen);
 dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
@@ -112,7 +112,7 @@ dcl-ds dsSIDTQ likeds(tSIDTQ_Def) based(pSIDTQ);
      SendDataQueue(dsSIDTQ.Name
                   :dsSIDTQ.Library
                   :nDataLen
-                  :%str(Data));
+                  :Data);
   on-error;
      return *off;
   endmon;

@@ -63,11 +63,11 @@ end-pr;
 
 dcl-pr SIDTQ_write ind extproc(*dclcase);
   SIDTQ like(tSIDTQ);
-  Data pointer value options(*string);
-  DataLen like(tSIDTQ_DataLen) value options(*nopass);
+  Data like(tSIDTQ_Data) const;
+  DataLen like(tSIDTQ_DataLen) const options(*nopass);
 end-pr;
 
-dcl-pr SIDTQ_read like(tQSNDDTAQ_Data) extproc(*dclcase);
+dcl-pr SIDTQ_read like(tSIDTQ_Data) extproc(*dclcase);
   SIDTQ like(tSIDTQ);
 end-pr;
 
