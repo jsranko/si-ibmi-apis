@@ -17,5 +17,5 @@ dcl-s tGETENV_Return pointer template;
 //==========================================================================================
 
 dcl-pr getenv like(tGETENV_Return) extproc(*dclcase);
-  Name pointer options(*string) value;
+  Name pointer options(*string:*trim) value;
 end-pr;
