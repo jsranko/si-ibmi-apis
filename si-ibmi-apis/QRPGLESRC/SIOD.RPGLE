@@ -308,3 +308,17 @@ dcl-ds dsSIOD likeds(tSIOD_Def) based(pSIOD);
 
 return;
 end-proc;
+
+//------------------------------------------------------------------------------------------
+
+dcl-proc SIOD_getTextDescription export;
+dcl-pi SIOD_getTextDescription like(tSIOD_TextDescription) extproc(*dclcase);
+  SIOD like(tSIOD);
+end-pi;
+dcl-ds dsSIOD likeds(tSIOD_Def) based(pSIOD);
+
+  pSIOD = %addr(SIOD);
+
+  getData(dsSIOD:2);
+  return %trim(dsSIOD.Data.TextDescription);
+end-proc;

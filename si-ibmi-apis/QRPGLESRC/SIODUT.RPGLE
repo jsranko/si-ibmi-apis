@@ -48,6 +48,7 @@ dcl-s ObjectDesc like(tSIOD);
   dsply SIOD_getReturnLibrary(ObjectDesc);
   dsply SIOD_getObjectType(ObjectDesc);
   dsply SIOD_exist(ObjectDesc);
+  dsply SIOD_getTextDescription(ObjectDesc);
   SIOD_close(ObjectDesc);
   return;
 end-proc;

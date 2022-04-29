@@ -25,6 +25,7 @@ dcl-s tSIOD_Type char(10) template;
 dcl-s tSIOD_FormatNubmer uns(5) template;
 dcl-s tSIOD_ObjectType varchar(10) template;
 dcl-s tSIOD_ReturnLibrary varchar(10) template;
+dcl-s tSIOD_TextDescription like(tQUSROBJD_TextDescription) template;
 
 dcl-s tSIOD_CreationDateAndTime char(13) template;
 
@@ -68,5 +69,9 @@ dcl-pr SIOD_getObjectType like(tSIOD_ObjectType) extproc(*dclcase);
 end-pr;
 
 dcl-pr SIOD_close extproc(*dclcase);
+  SIOD like(tSIOD);
+end-pr;
+
+dcl-pr SIOD_getTextDescription like(tSIOD_TextDescription) extproc(*dclcase);
   SIOD like(tSIOD);
 end-pr;
